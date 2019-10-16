@@ -21,6 +21,7 @@ def get_filters():
     while True:
         try:
             city = input("Enter chicago, new york city, or washington: ")
+            city = city.lower()
         except ValueError:
             continue
         if city in ('chicago', 'new york city', 'washington'):
@@ -30,6 +31,7 @@ def get_filters():
     while True:
         try:
             month = input("Enter all, january, february, ... june: ")
+            month = month.lower()
         except ValueError:
             continue
         if month in ('all', 'january', 'february', 'march',
@@ -40,6 +42,7 @@ def get_filters():
     while True:
         try:
             day = input("Enter all, monday, tuesday, ... sunday: ")
+            day = day.lower()
         except ValueError:
             continue
         if day in ('all','monday','tuesday','wednesday','thursday',

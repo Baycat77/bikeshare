@@ -202,12 +202,43 @@ def user_stats(df,city):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def show_raw_data(df):
+    """Displays raw data, five lines at a time, at user's request."""
+
+    i = 1
+    while True:
+       show_data = input('\nWould you like to see 5 lines of raw data? Enter yes or no. \n')
+       if show_data.lower() != 'yes':
+           break
+       else:
+           #Set data frame index to blank so printout won't confuse the user.
+           blankIndex=[''] * len(df)
+           df.index = blankIndex
+           i+=5
+           print('Raw data:' + '\n')
+           print(df[i-5:i])
+           print('-'*40)
+           while True:
+               show_more = input('\nWould you like to see 5 more lines of raw data? Enter yes or no. \n')
+               if show_more.lower() != 'yes':
+                   return
+               else:
+                   if i+5 > len(df.index):
+                      print('No more data to display.')
+                      print('_'*40)
+                   else:
+                      i+=5
+                      print('Raw data:' + '\n')
+                      print(df[i-5:i])
+                      print('-'*40)
+
 
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
 
+        show_raw_data(df)
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
